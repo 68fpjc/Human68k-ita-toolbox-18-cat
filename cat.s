@@ -4,14 +4,14 @@
 * 1.0
 * Itagaki Fumihiko 27-Jan-93  Zap.
 * 1.2
-* Itagaki Fumihiko 07-Feb-93  ƒtƒ@ƒCƒ‹ˆø”‚É‰ßè‚È / ‚ª‚ ‚ê‚Îœ‹‚·‚é
+* Itagaki Fumihiko 07-Feb-93  ãƒ•ã‚¡ã‚¤ãƒ«å¼•æ•°ã«éå‰°ãª / ãŒã‚ã‚Œã°é™¤å»ã™ã‚‹
 * 1.3
-* Itagaki Fumihiko 19-Feb-93  •W€“ü—Í‚ªØ‚è‘Ö‚¦‚ç‚ê‚Ä‚¢‚Ä‚à’[––‚©‚ç^C‚â^S‚È‚Ç‚ªŒø‚­‚æ‚¤‚É‚µ‚½
+* Itagaki Fumihiko 19-Feb-93  æ¨™æº–å…¥åŠ›ãŒåˆ‡ã‚Šæ›¿ãˆã‚‰ã‚Œã¦ã„ã¦ã‚‚ç«¯æœ«ã‹ã‚‰^Cã‚„^Sãªã©ãŒåŠ¹ãã‚ˆã†ã«ã—ãŸ
 * 1.4
-* Itagaki Fumihiko 03-Jan-94  BSS‚ª‚«‚¿‚ñ‚ÆŠm•Û‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚Ì‚ğC³
+* Itagaki Fumihiko 03-Jan-94  BSSãŒãã¡ã‚“ã¨ç¢ºä¿ã•ã‚Œã¦ã„ãªã‹ã£ãŸã®ã‚’ä¿®æ­£
 * 1.5
 *
-* Usage: cat [ -nbsvetmqBCZ ] [ <ƒtƒ@ƒCƒ‹> | - ] ...
+* Usage: cat [ -nbsvetmqBCZ ] [ <ãƒ•ã‚¡ã‚¤ãƒ«> | - ] ...
 *
 
 .include doscall.h
@@ -55,9 +55,9 @@ start:
 		bra.s	start1
 		dc.b	'#HUPAIR',0
 start1:
-		lea	bsstop(pc),a6			*  A6 := BSS‚Ìæ“ªƒAƒhƒŒƒX
-		lea	stack_bottom(a6),a7		*  A7 := ƒXƒ^ƒbƒN‚Ì’ê
-		lea	$10(a0),a0			*  A0 : PDBƒAƒhƒŒƒX
+		lea	bsstop(pc),a6			*  A6 := BSSã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		lea	stack_bottom(a6),a7		*  A7 := ã‚¹ã‚¿ãƒƒã‚¯ã®åº•
+		lea	$10(a0),a0			*  A0 : PDBã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a7,d0
 		sub.l	a0,d0
 		move.l	d0,-(a7)
@@ -67,22 +67,22 @@ start1:
 	*
 		move.l	#-1,stdin(a6)
 	*
-	*  ˆø”•À‚ÑŠi”[ƒGƒŠƒA‚ğŠm•Û‚·‚é
+	*  å¼•æ•°ä¸¦ã³æ ¼ç´ã‚¨ãƒªã‚¢ã‚’ç¢ºä¿ã™ã‚‹
 	*
-		lea	1(a2),a0			*  A0 := ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì•¶š—ñ‚Ìæ“ªƒAƒhƒŒƒX
-		bsr	strlen				*  D0.L := ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì•¶š—ñ‚Ì’·‚³
+		lea	1(a2),a0			*  A0 := ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®æ–‡å­—åˆ—ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		bsr	strlen				*  D0.L := ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®æ–‡å­—åˆ—ã®é•·ã•
 		addq.l	#1,d0
 		bsr	malloc
 		bmi	insufficient_memory
 
-		movea.l	d0,a1				*  A1 := ˆø”•À‚ÑŠi”[ƒGƒŠƒA‚Ìæ“ªƒAƒhƒŒƒX
+		movea.l	d0,a1				*  A1 := å¼•æ•°ä¸¦ã³æ ¼ç´ã‚¨ãƒªã‚¢ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 	*
-	*  ˆø”‚ğƒfƒR[ƒh‚µC‰ğß‚·‚é
+	*  å¼•æ•°ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã—ï¼Œè§£é‡ˆã™ã‚‹
 	*
-		moveq	#0,d6				*  D6.W : ƒGƒ‰[EƒR[ƒh
-		bsr	DecodeHUPAIR			*  ˆø”‚ğƒfƒR[ƒh‚·‚é
-		movea.l	a1,a0				*  A0 : ˆø”ƒ|ƒCƒ“ƒ^
-		move.l	d0,d7				*  D7.L : ˆø”ƒJƒEƒ“ƒ^
+		moveq	#0,d6				*  D6.W : ã‚¨ãƒ©ãƒ¼ãƒ»ã‚³ãƒ¼ãƒ‰
+		bsr	DecodeHUPAIR			*  å¼•æ•°ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹
+		movea.l	a1,a0				*  A0 : å¼•æ•°ãƒã‚¤ãƒ³ã‚¿
+		move.l	d0,d7				*  D7.L : å¼•æ•°ã‚«ã‚¦ãƒ³ã‚¿
 		subq.l	#1,d0
 		bne	decode_opt_start
 
@@ -90,7 +90,7 @@ start1:
 		bsr	strcmp
 		beq	cat_fish
 decode_opt_start:
-		moveq	#0,d5				*  D5.L : ƒtƒ‰ƒObits
+		moveq	#0,d5				*  D5.L : ãƒ•ãƒ©ã‚°bits
 decode_opt_loop1:
 		tst.l	d7
 		beq	decode_opt_done
@@ -186,7 +186,7 @@ option_C_found:
 		bra	set_option_done
 
 set_option_with_process:
-		bset	#FLAG_process,d5		*  ‘¦write•s‰Â
+		bset	#FLAG_process,d5		*  å³æ™‚writeä¸å¯
 set_option:
 		bset	d1,d5
 set_option_done:
@@ -195,8 +195,8 @@ set_option_done:
 		bra	decode_opt_loop1
 
 decode_opt_done:
-		moveq	#1,d0				*  o—Í‚Í
-		bsr	is_chrdev			*  ƒLƒƒƒ‰ƒNƒ^EƒfƒoƒCƒX‚©H
+		moveq	#1,d0				*  å‡ºåŠ›ã¯
+		bsr	is_chrdev			*  ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ»ãƒ‡ãƒã‚¤ã‚¹ã‹ï¼Ÿ
 		seq	do_buffering
 		beq	input_max			*  -- block device
 
@@ -209,7 +209,7 @@ decode_opt_done:
 		btst	#FLAG_B,d5
 		bne	inpbufsize_ok
 
-		bset	#FLAG_C,d5			*  ‰üs‚ğ•ÏŠ·‚·‚é
+		bset	#FLAG_C,d5			*  æ”¹è¡Œã‚’å¤‰æ›ã™ã‚‹
 		bra	inpbufsize_ok
 
 input_max:
@@ -217,19 +217,19 @@ input_max:
 inpbufsize_ok:
 		move.l	d0,inpbuf_size(a6)
 
-		*  process ‚ğ fix ‚·‚é
+		*  process ã‚’ fix ã™ã‚‹
 		btst	#FLAG_C,d5
 		beq	set_process_ok
 
 		bset	#FLAG_process,d5
 set_process_ok:
-		*  do_buffering ‚ğ fix ‚·‚é
+		*  do_buffering ã‚’ fix ã™ã‚‹
 		btst	#FLAG_process,d5
 		bne	set_buffering_ok
 
 		sf	do_buffering
 set_buffering_ok:
-		*  o—Íƒoƒbƒtƒ@‚ğŠm•Û‚·‚é
+		*  å‡ºåŠ›ãƒãƒƒãƒ•ã‚¡ã‚’ç¢ºä¿ã™ã‚‹
 		tst.b	do_buffering
 		beq	outbuf_ok
 
@@ -241,7 +241,7 @@ set_buffering_ok:
 		move.l	d0,outbuf_top
 		move.l	d0,outbuf_ptr
 outbuf_ok:
-		*  “ü—Íƒoƒbƒtƒ@‚ğŠm•Û‚·‚é
+		*  å…¥åŠ›ãƒãƒƒãƒ•ã‚¡ã‚’ç¢ºä¿ã™ã‚‹
 		move.l	inpbuf_size(a6),d0
 		bsr	malloc
 		bpl	inpbuf_ok
@@ -256,20 +256,20 @@ outbuf_ok:
 inpbuf_ok:
 		move.l	d0,inpbuf_top(a6)
 	*
-	*  •W€“ü—Í‚ğØ‚è‘Ö‚¦‚é
+	*  æ¨™æº–å…¥åŠ›ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 	*
-		clr.w	-(a7)				*  •W€“ü—Í‚ğ
-		DOS	_DUP				*  •¡»‚µ‚½ƒnƒ“ƒhƒ‹‚©‚ç“ü—Í‚µC
+		clr.w	-(a7)				*  æ¨™æº–å…¥åŠ›ã‚’
+		DOS	_DUP				*  è¤‡è£½ã—ãŸãƒãƒ³ãƒ‰ãƒ«ã‹ã‚‰å…¥åŠ›ã—ï¼Œ
 		addq.l	#2,a7
 		move.l	d0,stdin(a6)
 		bmi	start_do_files
 
 		clr.w	-(a7)
-		DOS	_CLOSE				*  •W€“ü—Í‚ÍƒNƒ[ƒY‚·‚éD
-		addq.l	#2,a7				*  ‚±‚¤‚µ‚È‚¢‚Æ ^C ‚â ^S ‚ªŒø‚©‚È‚¢
+		DOS	_CLOSE				*  æ¨™æº–å…¥åŠ›ã¯ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹ï¼
+		addq.l	#2,a7				*  ã“ã†ã—ãªã„ã¨ ^C ã‚„ ^S ãŒåŠ¹ã‹ãªã„
 start_do_files:
 	*
-	*  ŠJn
+	*  é–‹å§‹
 	*
 		clr.l	lineno(a6)
 		st	newline(a6)
@@ -318,10 +318,10 @@ exit_program:
 		move.l	stdin(a6),d0
 		bmi	exit_program_1
 
-		clr.w	-(a7)				*  •W€“ü—Í‚ğ
-		move.w	d0,-(a7)			*  Œ³‚É
-		DOS	_DUP2				*  –ß‚·D
-		DOS	_CLOSE				*  •¡»‚ÍƒNƒ[ƒY‚·‚éD
+		clr.w	-(a7)				*  æ¨™æº–å…¥åŠ›ã‚’
+		move.w	d0,-(a7)			*  å…ƒã«
+		DOS	_DUP2				*  æˆ»ã™ï¼
+		DOS	_CLOSE				*  è¤‡è£½ã¯ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹ï¼
 exit_program_1:
 		move.w	d6,-(a7)
 		DOS	_EXIT2
@@ -350,7 +350,7 @@ cat_one:
 		sf	terminate_by_ctrld(a6)
 		move.w	d2,d0
 		bsr	is_chrdev
-		beq	cat_one_start			*  -- ƒuƒƒbƒNEƒfƒoƒCƒX
+		beq	cat_one_start			*  -- ãƒ–ãƒ­ãƒƒã‚¯ãƒ»ãƒ‡ãƒã‚¤ã‚¹
 
 		btst	#5,d0				*  '0':cooked  '1':raw
 		bne	cat_one_start
@@ -732,18 +732,18 @@ malloc:
 
 msg_myname:		dc.b	'cat: ',0
 word_fish:		dc.b	'-fish',0
-msg_no_memory:		dc.b	'ƒƒ‚ƒŠ‚ª‘«‚è‚Ü‚¹‚ñ',CR,LF,0
-msg_open_fail:		dc.b	': ƒI[ƒvƒ“‚Å‚«‚Ü‚¹‚ñ',CR,LF,0
-msg_read_fail:		dc.b	': “ü—ÍƒGƒ‰[',CR,LF,0
-msg_write_fail:		dc.b	'cat: o—ÍƒGƒ‰[',CR,LF,0
-msg_stdin:		dc.b	'- •W€“ü—Í -',0
-msg_illegal_option:	dc.b	'•s³‚ÈƒIƒvƒVƒ‡ƒ“ -- ',0
-msg_usage:		dc.b	CR,LF,'g—p–@:  cat [-nbsvetmqBCZ] [--] [<ƒtƒ@ƒCƒ‹>] ...',CR,LF,0
-msg_catfish:		dc.b	'catfish n.y‹›z‚È‚Ü‚¸.',CR,LF,0
+msg_no_memory:		dc.b	'ãƒ¡ãƒ¢ãƒªãŒè¶³ã‚Šã¾ã›ã‚“',CR,LF,0
+msg_open_fail:		dc.b	': ã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“',CR,LF,0
+msg_read_fail:		dc.b	': å…¥åŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_write_fail:		dc.b	'cat: å‡ºåŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_stdin:		dc.b	'- æ¨™æº–å…¥åŠ› -',0
+msg_illegal_option:	dc.b	'ä¸æ­£ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- ',0
+msg_usage:		dc.b	CR,LF,'ä½¿ç”¨æ³•:  cat [-nbsvetmqBCZ] [--] [<ãƒ•ã‚¡ã‚¤ãƒ«>] ...',CR,LF,0
+msg_catfish:		dc.b	'catfish n.ã€é­šã€‘ãªã¾ãš.',CR,LF,0
 *****************************************************************
 .bss
 .even
-* ‚±‚ê‚ç‚Íputc‚ÅQÆ‚³‚ê‚é‚Ì‚Å abs data ‚Å‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
+* ã“ã‚Œã‚‰ã¯putcã§å‚ç…§ã•ã‚Œã‚‹ã®ã§ abs data ã§ãªã‘ã‚Œã°ãªã‚‰ãªã„
 outbuf_top:		ds.l	1
 outbuf_ptr:		ds.l	1
 outbuf_free:		ds.l	1
